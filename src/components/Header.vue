@@ -48,22 +48,22 @@
                         <li>Virtual</li>
                     </ul>
                 </div>
-                <div class="agent">
-                    <img src="../assets/windows.png" alt="windows">
+                <div class="agent"  v-for="(item, index) in items" v-bind:key="index">
+                    <img :src="item.src" alt="windows">
                     <div class="detail">
                         <table class="table1">
                             <tr>
-                                <th class="icon-desktop"></th>
-                                <th>&nbsp;fajobjvwbpqiprg.thoughtworks.com&nbsp;&nbsp;</th>
-                                <th><div>Building</div></th>
-                                <th class="icon-info">&nbsp;192.168.0.1&nbsp;&nbsp;</th>
-                                <th class="icon-cog">&nbsp;/var/lib/cruise-agent&nbsp;&nbsp;</th>
+                                <td class="icon-desktop"></td>
+                                <td><div>&nbsp;fajobjvwbpqiprg.thoughtworks.com&nbsp;&nbsp;</div></td>
+                                <td><div><span>Building</span></div></td>
+                                <td><div class="icon-info">&nbsp;192.168.0.1&nbsp;&nbsp;</div></td>
+                                <td><div class="icon-folder">&nbsp;/var/lib/cruise-agent&nbsp;&nbsp;</div></td>
                             </tr>
                         </table>
-                        <table class="table2">
+                        <table class="table2" v-for="(item,index) in browser" v-bind:key="index">
                             <tr>
-                                <th><div class="icon-plus"></div></th>
-                                <th>Firefox&nbsp;&nbsp;<span class="icon-trash"></span></th>
+                                <td><div class="icon-plus"></div></td>
+                                <td><div>{{item.name}}&nbsp;&nbsp;<span class="icon-trash"></span></div></td>
                             </tr>
                         </table>
                     </div>
@@ -92,7 +92,19 @@ export default {
                     iconClass: "icon-desktop",
                     num:5
                 },
-            ]
+            ],
+            browser:[{name:"Firefox"},{name:"Safari"},{name:"Ubuntu"},{name:"Chrome"}],
+            items:[{
+                src: require("../assets/windows.png")
+            },{
+                src: require("../assets/debin.png")
+            },{
+                src: require("../assets/cent_os.png")
+            },{
+                src: require("../assets/ubuntu.png")
+            },{
+                src: require("../assets/suse.png")
+            }]
         }
     }
 }
@@ -115,6 +127,7 @@ html,body{
     padding: 10px 0;
     text-align: center;
     background: white;
+    position: relative;
 }
 .header-content{
     margin: 0 200px;
@@ -131,7 +144,7 @@ html,body{
 .content-fluid{
     width: 1200px;
     height: calc(100vh - 90px);
-    overflow: hidden;
+    overflow-y: scroll;
     margin: auto;
 }
 /* 左边导航栏 */
@@ -179,8 +192,7 @@ html,body{
 }
 /* 右边部分 */
 .content{
-    height: 100%;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 .building{
     width: 33.3%;
@@ -241,28 +253,49 @@ html,body{
 }
 .detail{
     min-height: 100px;
-    margin-left: 115px;
+    margin: 0 15px 0 115px
 }
-.detail table tr th{
+.detail table{
     height: 50px;
 }
-.table1 th:nth-child(1){
-    font-size: 28px;
+.table1 td:nth-child(1){
+    font-size: 18px;
     color: #435466;
 }
-.table1 th:nth-child(2){
+.table1 td:nth-child(2) div{
     color: #00B4CF;
+    width: 250px;
+    text-align: left;
 }
-.table1 th:nth-child(3) div{
-    background: #7fbc39;
+.table1 td:nth-child(3) div{
     color: white;
-    padding: 3px 0;
+    width: 100px;
 }
-.table2 th:nth-child(1) div{
+.table1 td:nth-child(3) div span{
+    background: #7FBC39;
+    padding: 3px 1px;
+}
+.table1 td:nth-child(4) div{
+    text-align: left;
+    width: 120px;
+}
+.table1 td:nth-child(5) div{
+    text-align: left;
+    width: 200px;
+}
+.table2{
+    float: left;
+}
+.table2 td:nth-child(1) div{
     font-size:18px;
     background: #00B4CF;
     color: white;
-    
+    padding: 1px 3px;                          
+}
+.table2 td:nth-child(2) div{
+    background: #EFEFEF;
+    padding: 4px 8px 0 8px;
+    margin-right: 10px; 
 }
 .footer{
     position: fixed;
