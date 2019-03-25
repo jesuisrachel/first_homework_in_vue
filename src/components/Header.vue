@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="header">
+        <div class="header" v-if="'ok'">
             <div class="header-content">
                 <span>
                     <img src="../assets/logo.svg" alt="cruise">
@@ -36,15 +36,10 @@
                 </div>
             </div>
             <div class="content">
-                <div class="building">
-                    <div>Building</div>
+                <div class="building" v-for="(item, index) in msg" v-bind:key="index">
+                    <div>{{item.title}}</div>
                     <span class="icon-cog"></span>
-                    <div>3</div>
-                </div>
-                <div class="building">
-                    <div>Idle</div>
-                    <span class="icon-cog"></span>
-                    <div>3</div>
+                    <div>{{item.num}}</div>
                 </div>
                 <div class="tab">
                     <ul>
@@ -55,10 +50,23 @@
                 </div>
                 <div class="agent">
                     <img src="../assets/windows.png" alt="windows">
-                    <div class="upper">
-                        <div class="icon-desktop"><span>&nbsp;fajobjvwbpqiprg.thoughtworks.com</span></div>
+                    <div class="detail">
+                        <table class="table1">
+                            <tr>
+                                <th class="icon-desktop"></th>
+                                <th>&nbsp;fajobjvwbpqiprg.thoughtworks.com&nbsp;&nbsp;</th>
+                                <th><div>Building</div></th>
+                                <th class="icon-info">&nbsp;192.168.0.1&nbsp;&nbsp;</th>
+                                <th class="icon-cog">&nbsp;/var/lib/cruise-agent&nbsp;&nbsp;</th>
+                            </tr>
+                        </table>
+                        <table class="table2">
+                            <tr>
+                                <th><div class="icon-plus"></div></th>
+                                <th>Firefox&nbsp;&nbsp;<span class="icon-trash"></span></th>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="lower"></div>
                 </div>
             </div>
         </div>
@@ -71,6 +79,22 @@
 
 <script>
 export default {
+    data(){
+        return{
+            msg:[
+                {
+                    title:"Building",
+                    iconClass: "icon-cog",
+                    num:3
+                },
+                {
+                    title:"Idle",
+                    iconClass: "icon-desktop",
+                    num:5
+                },
+            ]
+        }
+    }
 }
 </script>
 
@@ -208,22 +232,37 @@ html,body{
     height: 100px;
     margin: 0 0 15px 15px;
     background: white;
+    position: relative;
 }
 .agent img{
-    float: left;
+    left: 0;
     padding: 10px;
+    position: absolute;
 }
-.icon-desktop{
-    font-size: 16px;
-    color: #efefef;
+.detail{
+    min-height: 100px;
+    margin-left: 115px;
 }
-.icon-desktop span{
+.detail table tr th{
+    height: 50px;
+}
+.table1 th:nth-child(1){
+    font-size: 28px;
+    color: #435466;
+}
+.table1 th:nth-child(2){
     color: #00B4CF;
 }
-.upper{
-    height: 50%;
-    float: left;
-    line-height: 50%;
+.table1 th:nth-child(3) div{
+    background: #7fbc39;
+    color: white;
+    padding: 3px 0;
+}
+.table2 th:nth-child(1) div{
+    font-size:18px;
+    background: #00B4CF;
+    color: white;
+    
 }
 .footer{
     position: fixed;
